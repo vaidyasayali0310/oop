@@ -1,0 +1,69 @@
+import java.util.*;
+
+class Calculator
+{
+public static void main(String[] args)
+{
+Scanner sc = new Scanner(System.in);
+
+char ch;
+
+do 
+{
+System.out.println("Enter First Number:");
+double n1 = sc.nextDouble();
+
+System.out.println("Enter Second Number:");
+double n2 = sc.nextDouble();
+
+System.out.println("Display Menu:");
+System.out.println("1.Addition");
+System.out.println("2.Subtraction");
+System.out.println("3.Multiplication");
+System.out.println("4.Division");
+
+System.out.println("Enter your choice (1-4):");
+int choice = sc.nextInt();
+
+double result = 0;
+
+switch(choice)
+{
+case 1:
+result = n1 + n2;
+System.out.println("Addition of two numbers is: " + result);
+break;
+
+case 2:
+result = n1 - n2;
+System.out.println("Subtraction of two numbers is: " + result);
+break;
+
+case 3:
+result = n1 * n2;
+System.out.println("Multiplication of two numbers is: " + result);
+break;
+
+case 4:
+while(n2 == 0)
+{
+System.out.println("Denominator cannot be 0.");
+System.out.println("Please enter another second number:");
+n2 = sc.nextDouble();
+}
+result = n1 / n2;
+System.out.println("Division of two numbers is: " + result);
+break;
+
+default:
+System.out.println("Invalid Choice");
+}
+
+System.out.println("Do you want to continue (Y/N):");
+ch = sc.next().charAt(0);
+}
+while(ch == 'Y' || ch == 'y');
+
+System.out.println("Calculator Closed");
+}
+}

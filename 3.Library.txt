@@ -1,0 +1,186 @@
+import java.util.Scanner;
+
+class Book
+{
+String bookname;
+String Author;
+boolean isIssued;
+
+static int totalBooks = 0;
+
+// Constructor
+public Book(String bookname, String Author)
+{
+this.bookname = bookname;
+this.Author = Author;
+this.isIssued = false;
+totalBooks++;
+}
+
+// Display Book Details
+void displayBook()
+{
+System.out.println("\nBook Name : " + bookname);
+System.out.println("Author    : " + Author);
+
+if(isIssued)
+{
+System.out.println("Status    : Issued");
+}
+else
+{
+System.out.println("Status    : Available");
+}
+}
+
+// Issue Book
+void issueBook()
+{
+if(!isIssued)
+{
+isIssued = true;
+System.out.println(bookname + " issued successfully!");
+}
+else
+{
+System.out.println(bookname + " already issued!");
+}
+}
+
+// Return Book
+void returnBook()
+{
+if(isIssued)
+{
+isIssued = false;
+System.out.println(bookname + " returned successfully!");
+}
+else
+{
+System.out.println(bookname + " was not issued!");
+}
+}
+
+public static void main(String[] args)
+{
+Scanner sc = new Scanner(System.in);
+
+// Creating Book Objects
+Book b1 = new Book("Wings Of Fire", "Dr. APJ Abdul Kalam");
+Book b2 = new Book("Mahabharat", "Dr. Kamlesh Soman");
+
+int choice, bookChoice;
+
+do
+{
+System.out.println("\n***** LIBRARY MANAGEMENT SYSTEM *****");
+System.out.println("1. Display Books");
+System.out.println("2. Issue Book");
+System.out.println("3. Return Book");
+System.out.println("4. Total Books");
+System.out.println("5. Exit");
+
+System.out.print("Enter choice: ");
+choice = sc.nextInt();
+
+switch(choice)
+{
+case 1:
+System.out.println("\n1. Wings Of Fire");
+b1.displayBook();
+
+System.out.println("\n2. Mahabharat");
+b2.displayBook();
+break;
+
+case 2:
+System.out.println("\nSelect Book to Issue");
+System.out.println("1. Wings Of Fire");
+System.out.println("2. Mahabharat");
+
+System.out.print("Enter Book Number: ");
+bookChoice = sc.nextInt();
+
+if(bookChoice == 1)
+{
+b1.issueBook();
+}
+else if(bookChoice == 2)
+{
+b2.issueBook();
+}
+else
+{
+System.out.println("Invalid Book Number!");
+}
+break;
+
+case 3:
+System.out.println("\nSelect Book to Return");
+System.out.println("1. Wings Of Fire");
+System.out.println("2. Mahabharat");
+
+System.out.print("Enter Book Number: ");
+bookChoice = sc.nextInt();
+
+if(bookChoice == 1)
+{
+b1.returnBook();
+}
+else if(bookChoice == 2)
+{
+b2.returnBook();
+}
+else
+{
+System.out.println("Invalid Book Number!");
+}
+break;
+
+case 4:
+System.out.println("Total Books : " + Book.totalBooks);
+break;
+
+case 5:
+System.out.println("Thank You!");
+break;
+
+default:
+System.out.println("Invalid Choice!");
+}
+}
+while(choice != 5);
+
+sc.close();
+}
+}
+
+
+
+//static int totalBooks = 0;
+//Counts total books.
+
+//public Book(String bookname, String Author)
+//Constructor gives values to object variables.
+
+//this is a keyword in Java.
+//It refers to the current object of the class
+
+//this.Author = Author;
+//Assigns author name.
+
+//this.isIssued = false;
+//Initially every book is available.
+
+//if(isIssued)
+//Checks if book is issued.
+
+//isIssued = true;
+//Changes status to issued.
+
+//choice → menu choice
+//bookChoice → selected book number
+
+//sc.close();
+//Closes Scanner object.
+//Good programming practice

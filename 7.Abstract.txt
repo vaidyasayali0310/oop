@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+abstract class Shape 
+{
+
+abstract void area();
+}
+
+class Circle extends Shape 
+{
+
+double radius;
+
+Circle(double r) 
+{
+radius = r;
+}
+
+void area() 
+{
+double a = 3.14 * radius * radius;
+System.out.println("Area of Circle = " + a);
+}
+}
+
+public class Abstract 
+{
+
+public static void main(String[] args) 
+{
+
+Scanner sc = new Scanner(System.in);
+char ch;
+
+do 
+{
+
+System.out.print("Enter radius of circle: ");
+double r = sc.nextDouble();
+
+Circle c = new Circle(r);
+
+c.area();
+
+System.out.print("\nDo you want to continue? (y/n): ");
+ch = sc.next().charAt(0);
+
+}
+while(ch == 'y' || ch == 'Y');
+
+System.out.println("Program Ended.");
+
+sc.close();
+}
+}

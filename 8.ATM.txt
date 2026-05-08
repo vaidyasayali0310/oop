@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+public class ATM {
+static double balance = 1000;
+
+public static void main(String[] args) 
+{
+
+Scanner sc = new Scanner(System.in);
+int choice;
+char ch;
+
+do 
+{
+System.out.println("\n1.Check Balance  2.Deposit  3.Withdraw");
+System.out.print("Enter choice: ");
+choice = sc.nextInt();
+
+try 
+{
+if (choice == 1) 
+{
+System.out.println("Balance: " + balance);
+
+}
+else if (choice == 2) 
+{
+System.out.print("Enter amount: ");
+double amt = sc.nextDouble();
+
+if (amt <= 0)
+throw new IllegalArgumentException("Invalid Amount");
+
+balance += amt;
+System.out.println("Deposited Successfully");
+}
+else if (choice == 3) 
+{
+System.out.print("Enter amount: ");
+double amt = sc.nextDouble();
+
+if (amt <= 0)
+throw new IllegalArgumentException("Invalid Amount");
+
+if (amt > balance)
+throw new ArithmeticException("Insufficient Balance");
+
+balance -= amt;
+System.out.println("Withdraw Successful");
+}
+else 
+{
+System.out.println("Invalid Choice");
+}
+}
+catch (Exception e) 
+{
+System.out.println("Error: " + e.getMessage());
+} 
+finally 
+{
+System.out.println("Transaction Done");
+}
+
+System.out.print("Continue? (y/n): ");
+ch = sc.next().charAt(0);
+} 
+while (ch == 'y' || ch == 'Y');
+
+System.out.println("Thank You!");
+sc.close();
+}
+}
