@@ -1,0 +1,167 @@
+import java.util.*;
+import java.sql.*;
+
+class StudentManagement {
+
+public static void main(String[] args) 
+{
+Scanner sc = new Scanner(System.in);
+
+try 
+{
+
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentdb", "root", "Sayali");
+
+System.out.println("Connected");
+
+con.setAutoCommit(false);
+
+int choice = 0;
+
+while (true) 
+{
+System.out.println("\n--- STUDENT MENU ---");
+System.out.println("1. Insert");
+System.out.println("2. View");
+System.out.println("3. Update");
+System.out.println("4. Delete");
+System.out.println("5. Exit");
+
+System.out.print("Enter choice: ");
+choice = sc.nextInt();
+
+switch (choice) 
+{
+
+case 1:
+PreparedStatement ps1 = con.prepareStatement(
+"INSERT INTO STUDENT_MARKS(roll_no,name,marks) VALUES(?,?,?)");
+
+System.out.print("Enter Roll No: ");
+int r = sc.nextInt();
+
+sc.nextLine();
+
+System.out.print("Enter Name: ");
+String n = sc.nextLine();
+
+System.out.print("Enter Marks: ");
+int m = sc.nextInt();
+
+ps1.setInt(1, r);
+ps1.setString(2, n);
+ps1.setInt(3, m);
+
+try 
+{
+ps1.executeUpdate();
+con.commit();
+
+System.out.println("Inserted");
+}
+catch (Exception e) 
+{
+
+System.out.println("Error :" + e);
+con.rollback();
+}
+break;
+
+case 2:
+PreparedStatement ps2 = con.prepareStatement(
+"SELECT * FROM STUDENT_MARKS");
+
+try 
+{
+ResultSet rs = ps2.executeQuery();
+
+while (rs.next()) 
+{
+System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getInt(3));
+}
+}
+catch (Exception e) 
+{
+System.out.println("Error :" + e);
+}
+break;
+
+case 3:
+PreparedStatement ps3 = con.prepareStatement(
+"UPDATE STUDENT_MARKS SET NAME=?, MARKS=? WHERE ROLL_NO=?");
+
+System.out.print("Enter Roll No to Update: ");
+int roll = sc.nextInt();
+
+sc.nextLine();
+
+System.out.print("Enter New Name: ");
+String name = sc.nextLine();
+
+System.out.print("Enter New Marks: ");
+int marks = sc.nextInt();
+
+ps3.setString(1, name);
+ps3.setInt(2, marks);
+ps3.setInt(3, roll);
+
+try 
+{
+ps3.executeUpdate();
+con.commit();
+
+System.out.println("Updated");
+
+} 
+catch (Exception e) 
+{
+
+System.out.println("Error :" + e);
+con.rollback();
+}
+break;
+
+case 4:
+
+PreparedStatement ps4 = con.prepareStatement(
+"DELETE FROM STUDENT_MARKS WHERE ROLL_NO=?");
+
+System.out.print("Enter Roll No to Delete: ");
+int d = sc.nextInt();
+
+ps4.setInt(1, d);
+
+                        
+try 
+{
+
+ps4.executeUpdate();
+con.commit();
+
+System.out.println("Deleted");
+} 
+catch (Exception e) 
+{
+System.out.println("Error :" + e);
+con.rollback();
+}
+break;
+
+case 5:
+con.close();
+sc.close();
+
+System.out.println("Program Ended");
+System.exit(0);
+
+default:
+System.out.println("Invalid Choice");
+}
+}
+} 
+catch (Exception e) 
+{
+System.out.println("Error: " + e);
+}
+}
+}

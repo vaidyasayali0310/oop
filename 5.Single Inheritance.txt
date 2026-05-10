@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+// Superclass
+class Book {
+String bookName;
+String authorName;
+
+void getBookDetails(String bName, String aName) 
+{
+bookName = bName;
+authorName = aName;
+}
+
+void displayBookDetails() 
+{
+System.out.println("Book Name: " + bookName);
+System.out.println("Author Name: " + authorName);
+}
+}
+
+// Subclass extending superclass
+class EBook extends Book 
+{
+int fileSize;
+
+void getEBookDetails(int size) 
+{
+fileSize = size;
+}
+
+void displayEBookDetails() 
+{
+System.out.println("File Size: " + fileSize + " MB");
+}
+}
+
+public class SingleInheritance 
+{
+public static void main(String[] args) 
+{
+Scanner sc = new Scanner(System.in);
+
+EBook e = new EBook();
+
+System.out.print("Enter Book Name: ");
+String bName = sc.nextLine();
+
+System.out.print("Enter Author Name: ");
+String aName = sc.nextLine();
+
+System.out.print("Enter File Size (MB): ");
+int size = sc.nextInt();
+
+// Calling superclass method
+e.getBookDetails(bName, aName);
+
+// Calling subclass method
+e.getEBookDetails(size);
+
+System.out.println("\nE-Book Details");
+
+// Calling superclass method
+e.displayBookDetails();
+
+// Calling subclass method
+e.displayEBookDetails();
+
+sc.close();
+}
+}
